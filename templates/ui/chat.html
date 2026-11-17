@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}{{ t.nav_chat }} · ETqa{% endblock %}
+{% block body %}
+{% include "ui/_topbar.html" %}
+{{ config|json_script:"page-config" }}{{ t|json_script:"ui-strings" }}
+<div class="chat-layout">
+  <aside class="chat-side" {% if not config.saved %}hidden{% endif %}>
+    <button type="button" id="new-chat" class="secondary">{{ t.new_chat }}</button>
+    <h2>{{ t.history }}</h2>
+    <ul id="conversations" class="conv-list"></ul>
+  </aside>
+  <main class="chat-main">
+    {% if not config.saved %}<p class="notice">{{ t.unsaved_note }}</p>{% endif %}
+    <div id="ai-banner" class="notice warn" hidden>{{ t.ai_down }}</div>
+    <ol id="messages" class="messages" aria-live="polite"></ol>
+    <form id="ask-form" class="ask-form">
+      <label class="visually-hidden" for="question">{{ t.ask_placeholder }}</label>
+      <textarea id="question" rows="3" maxlength="4000" placeholder="{{ t.ask_placeholder }}" dir="auto" required></textarea>
+      <div class="ask-row">
+        <select id="collection" aria-label="{{ t.collection }}">
+          <option value="">{{ t.all_collections }}</option>
+          {% for c in config.collections %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}
+        </select>
+        <button type="submit" class="primary">{{ t.ask }}</button>
+      </div>
+    </form>
+  </main>
+</div>
+<script src="{% static 'js/chat.js' %}" defer></script>
+{% endblock %}

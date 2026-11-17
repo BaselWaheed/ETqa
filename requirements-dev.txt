@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==8.4.2
+pytest-django==4.14.0
+import-linter==2.16
+pillow==13.0.0  # test fixtures only (OCR images)

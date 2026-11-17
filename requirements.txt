@@ -1,0 +1,12 @@
+# Pinned for reproducible installs (pip install --user -r requirements.txt works without admin).
+Django==5.2.19
+djangorestframework==3.16.1
+psycopg[binary]==3.2.13
+django-environ==0.12.1
+waitress==3.0.2
+whitenoise==6.12.0
+numpy==2.5.4
+pypdf==5.9.0
+python-docx==1.2.0
+openpyxl==3.1.5
+# Optional, for exact token counts (U12): tokenizers

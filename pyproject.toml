@@ -1,0 +1,31 @@
+[project]
+name = "etqa"
+version = "0.6.0"
+description = "ETqa - on-premises AI QA engineering platform (Phase 1 foundation)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+# Module boundaries (ADR-01). Higher layers may import lower layers, never the reverse.
+# Run: lint-imports
+[tool.importlinter]
+root_packages = ["apps"]
+
+[[tool.importlinter.contracts]]
+name = "ETqa module layers"
+type = "layers"
+layers = [
+    "apps.ui | apps.ops",
+    "apps.chat | apps.testcases",
+    "apps.ingestion",
+    "apps.retrieval | apps.documents",
+    "apps.ai",
+    "apps.jobs",
+    "apps.access",
+    "apps.accounts",
+    "apps.sysconfig",
+    "apps.audit",
+]

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ t.sign_in }} · ETqa{% endblock %}
+{% block body %}
+<main class="login">
+  <section class="login-brand">
+    <p class="wordmark">ETqa</p>
+    <p class="login-tagline">{{ t.tagline }}</p>
+  </section>
+  <section class="login-panel">
+    <button type="button" class="lang-switch" data-lang="{{ t.switch_code }}" lang="{{ t.switch_code }}">{{ t.switch_to }}</button>
+    <form method="post" class="login-form" novalidate>
+      {% csrf_token %}
+      <h1>{{ t.sign_in }}</h1>
+      {% if form.non_field_errors %}
+        <div class="error" role="alert">{% for e in form.non_field_errors %}<p>{{ e }}</p>{% endfor %}</div>
+      {% endif %}
+      <label for="id_username">{{ t.username }}</label>
+      <input id="id_username" name="username" autocomplete="username" required autofocus value="{{ form.username.value|default_if_none:'' }}">
+      <label for="id_password">{{ t.password }}</label>
+      <input id="id_password" name="password" type="password" autocomplete="current-password" required>
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="primary">{{ t.sign_in }}</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

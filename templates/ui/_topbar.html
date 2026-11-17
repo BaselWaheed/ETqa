@@ -1,0 +1,14 @@
+<header class="topbar">
+  <a class="wordmark small" href="{% url 'ui:home' %}">ETqa</a>
+  <nav class="mainnav" aria-label="Main">
+    <a href="{% url 'ui:chat' %}" {% if page == 'chat' %}aria-current="page"{% endif %}>{{ t.nav_chat }}</a>
+    <a href="{% url 'ui:documents' %}" {% if page == 'documents' %}aria-current="page"{% endif %}>{{ t.nav_documents }}</a>
+    {% if perms.access.generate_test_cases %}<a href="{% url 'ui:testcases' %}" {% if page == 'testcases' %}aria-current="page"{% endif %}>{{ t.nav_testcases }}</a>{% endif %}
+  </nav>
+  <div class="topbar-actions">
+    <span class="who">{{ request.user.get_full_name|default:request.user.username }}</span>
+    <button type="button" class="lang-switch" data-lang="{{ t.switch_code }}" data-authenticated="1" lang="{{ t.switch_code }}">{{ t.switch_to }}</button>
+    {% if perms.access.manage_users or perms.access.configure_models %}<a class="link" href="{% url 'admin:index' %}">{{ t.administration }}</a>{% endif %}
+    <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit" class="link">{{ t.sign_out }}</button></form>
+  </div>
+</header>

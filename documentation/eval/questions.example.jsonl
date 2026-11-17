@@ -1,0 +1,5 @@
+{"id": "q001", "category": "en", "question": "How many times are failed charges retried?", "expected_documents": ["Billing guide"], "should_be_insufficient": false}
+{"id": "q002", "category": "ar", "question": "ما معنى الخطأ في الرصيد غير الكافي؟", "expected_documents": ["Billing guide"], "should_be_insufficient": false}
+{"id": "q003", "category": "identifier", "question": "ERR_4012", "expected_documents": ["Billing guide"], "should_be_insufficient": false}
+{"id": "q004", "category": "mixed", "question": "ما هو retry policy في billing adapter؟", "expected_documents": ["Billing guide"], "should_be_insufficient": false}
+{"id": "q005", "category": "en", "question": "What is the company's parking policy?", "expected_documents": [], "should_be_insufficient": true}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}{{ t.nav_testcases }} · ETqa{% endblock %}
+{% block body %}
+{% include "ui/_topbar.html" %}
+{{ config|json_script:"page-config" }}{{ t|json_script:"ui-strings" }}
+<main class="page wide">
+  <h1>{{ t.nav_testcases }}</h1>
+  <form id="tc-form" class="tc-form">
+    <fieldset>
+      <legend>{{ t.tc_source }}</legend>
+      <label class="inline"><input type="radio" name="mode" value="document" checked> {{ t.tc_document }}</label>
+      <label class="inline"><input type="radio" name="mode" value="text"> {{ t.tc_text }}</label>
+    </fieldset>
+    <label data-mode="document">{{ t.choose_document }}<select name="document"></select></label>
+    <div data-mode="text" hidden>
+      <label>{{ t.collection }}<select name="collection">{% for c in config.collections %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}</select></label>
+      <label>{{ t.tc_text }}<textarea name="requirement" rows="3" maxlength="4000" dir="auto"></textarea></label>
+    </div>
+    <label>{{ t.tc_instructions }}<textarea name="instructions" rows="2" maxlength="2000" dir="auto"></textarea></label>
+    <label>{{ t.template }}<select name="template"></select></label>
+    <label class="inline"><input type="checkbox" name="fill_priority"> {{ t.fill_priority }}</label>
+    <button type="submit" class="primary">{{ t.generate }}</button>
+    <p id="tc-msg" class="form-msg" role="status"></p>
+  </form>
+  <h2>{{ t.sets }}</h2>
+  <ul id="sets" class="sets"></ul>
+  <section id="set-view" hidden>
+    <div class="set-head"><h2 id="set-title"></h2><a id="export-link" class="primary button-link" hidden>{{ t.export }}</a></div>
+    <p id="set-summary" class="muted"></p>
+    <div class="table-wrap"><table class="data cases"><thead id="cases-head"></thead><tbody id="cases-body"></tbody></table></div>
+  </section>
+</main>
+<script src="{% static 'js/testcases.js' %}" defer></script>
+{% endblock %}
